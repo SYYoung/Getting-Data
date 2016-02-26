@@ -19,6 +19,7 @@ quiz3_2 <- function() {
 }
 
 quiz3_3 <- function() {
+    library(dplyr)
     fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
     download.file(fileUrl, destfile="./data/gdp.csv",method="curl")
     gdp <- read.csv("./data/gdp.csv",stringsAsFactors=FALSE)
@@ -51,9 +52,24 @@ quiz3_3 <- function() {
     income_d2 <- group_by(d2,Income.Group)
     #summarize(income_d2,n())
     # break into different GDP ranking groups. each has 38
-    income_rank <- summarize(income_grp, top_38=get_grp(income_grp,38,1),
-                             second_38=get_grp(income_grp,76,38))
-    
+    income_rank <- summarize(income_grp, count=n(),
+                                    valid=sum(!is.na(Gross.domestic.product.2012)),
+                                    top_38=sum(Gross.domestic.product.2012<=38,
+                                                    na.rm=TRUE),
+                                    sec_38=sum((Gross.domestic.product.2012>38 &
+                                                Gross.domestic.product.2012<=76),
+                                               na.rm=TRUE),
+                                    third_38=sum((Gross.domestic.product.2012>76 &
+                                             Gross.domestic.product.2012<=114),
+                                        na.rm=TRUE),
+                                    fourth_38=sum((Gross.domestic.product.2012>114 &
+                                               Gross.domestic.product.2012<=152),
+                                          na.rm=TRUE),
+                                    last_38=sum((Gross.domestic.product.2012>152 &
+                                               Gross.domestic.product.2012<=190),
+                                          na.rm=TRUE)
+                             )
+ 
     income_rank
     
 }
