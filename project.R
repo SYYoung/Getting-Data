@@ -1,4 +1,4 @@
-merge_data <- function() {
+get_data <- function() {
     # read the attribute list. it will be used as the column names
     fileName <- "./UCI HAR Dataset/features.txt"
     d1 <- read.table(fileName, colClasses=c("numeric","character"))
@@ -15,9 +15,16 @@ merge_data <- function() {
     subject <- as.numeric(d1[,1])
     print(str(subject))
     
+    testFileName <- "./UCI HAR Dataset/test/y_test.txt"
+    d1 <- read.table(testFileName, colClasses=c("numeric"), col.names="Activity")
+    activity <- as.numeric(d1[,1])
+    print(str(activity))
     
+    # integrate all three sets of data
+    testData <- cbind(subject,data1,activity)
+    print(str(testData))
 }
 
 project <- function() {
-    merge_data()
+    get_data()
 }
