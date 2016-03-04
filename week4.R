@@ -34,3 +34,20 @@ week4_2 <- function() {
     # regular expression I
     
 }
+
+week4_3 <- function() {
+    
+}
+
+week4_4 <- function() {
+    # working with dates
+    d2 <- Sys.date()
+    format(d2, "%a %b %d") #%a: weekday, %b: abbreviated month, %d:day as number
+    # may return as: "Sun Jan 12"
+    
+    # creating dates
+    x = c("1jan1960", "2jan1960", "31mar1960", "30jul1960"); z=as.Date(x,"%d%b%Y")
+    # it will come out as: "1960-01-01""1960-01-02"...
+    
+    library(lubridate)
+}
