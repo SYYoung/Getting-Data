@@ -62,7 +62,7 @@ project <- function() {
     indiv_data <- group_by(coredata,subject,activityname)
     print(str(indiv_data))
  
-    summarise(indiv_data, totalMeasure=n(), mean_each=mean)
+    summarise_each(indiv_data, funs(mean))
     
     indiv_data
 
